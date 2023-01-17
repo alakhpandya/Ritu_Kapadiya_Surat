@@ -47,7 +47,7 @@ import datetime
 # print(datetime.MINYEAR)
 # print(datetime.UTC)
 
-ritu_bday = datetime.date(2023, 9, 10)
+ritu_bday = datetime.date(2002, 9, 10)
 # print(ritu_bday)
 # print(ritu_bday.day)
 # print(ritu_bday.month)
@@ -71,3 +71,8 @@ print(ritu_bday + period)
 """
 
 print(f"Ritu is a very good girl. She was born on {ritu_bday}.")
+
+print(f'Ritu is a very good girl. She was born on {ritu_bday.strftime("%B %dth, %Y (%a)")}.')
+
+chandrayaan2_land = datetime.datetime.strptime("6 September 2019, 20:23", "%d %B %Y, %H:%M")
+print(chandrayaan2_land)
