@@ -2,6 +2,8 @@
 """
 id
 """
+from datetime import datetime
+
 class Employee():
     allEmployees = []
     paidLeaves = 2
@@ -11,6 +13,8 @@ class Employee():
         self.name = name
         self.age = age
         self.gender = gender
+        self.active = True
+        self.generateID()
         Employee.allEmployees.append(self)
 
     def printDetails(self):
@@ -20,14 +24,36 @@ class Employee():
         print("Gender: ", self.gender)
 
     @staticmethod       # decorators/ wrapper functions
-    def printAllEmployees():
-        print("Sr nos of all employees:")
+    def printAllEmployees():    # methods that do not take any argument are called static methods
+        print("id\t\tName")
         for i in range(len(Employee.allEmployees)):
-            print(f"{i}\t{Employee.allEmployees[i].name}")
+            if Employee.allEmployees[i].active:
+                print(f"{Employee.allEmployees[i].id}\t{Employee.allEmployees[i].name}")
 
-e1 = Employee("Nisha", 21, "F")
-e2 = Employee("Ramesh", 23, "M")
+    @classmethod    # methods those take class as an argument are called class methods
+    def addEmployee(cls):
+        print("Please enter the following details:")
+        name = input("Name: ")
+        age = int(input("Age: "))
+        gender = input("Gender: ")
+        return cls(name, age, gender)
+    
+    def generateID(self):
+        ch = input("Do you want to enter year & month of joining manually? Y/N: ").lower()
+        if ch == "y":
+            year = input("Year(YYYY): ").zfill(4)
+            month = input("Month(mm): ").zfill(2)
+        else:
+            year = str(datetime.now().year)
+            month = str(datetime.now().month).zfill(2)
+        self.id = year[2 : ] + month + "D" + str(len(Employee.allEmployees) + 100)
+
+# e1 = Employee("Nisha", 21, "F")
+# e2 = Employee("Ramesh", 23, "M")
 # e1.printDetails()
+"""
+Format of employee id: 2302M101 (YY-MM-Designation-SrNo+100)
+"""
 while True:
     print("Press 1 to add an employee")
     print("Press 2 to view details of an employee")
@@ -36,16 +62,21 @@ while True:
     print("Press 9 to exit")
     option = int(input())
     if option == 1:
-        pass
+        Employee.addEmployee()
+        
 
     elif option == 2:
         Employee.printAllEmployees()
 
-        srNo = int(input("Sr no of the employee: "))    # 0, 1
+        srNo = int(input("Last 3 digits of employee id: ")) - 100    # 0, 1
         Employee.allEmployees[srNo].printDetails()
 
     elif option == 3:
-        pass
+        Employee.printAllEmployees()
+
+        srNo = int(input("Last 3 digits of employee id: ")) - 100
+        # Employee.allEmployees.pop(srNo)
+        Employee.allEmployees[srNo].active = False
 
     elif option == 4:
         pass
