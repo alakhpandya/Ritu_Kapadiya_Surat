@@ -1,56 +1,15 @@
 # Employee Management:
-"""
-id
-"""
-from datetime import datetime
+from employee import Employee
+from manager import Manager
+from salesExecutive import SalesExecutive
+from peon import Peon
+from developer import Developer
+from generalManager import GeneralManager
 
-class Employee():
-    allEmployees = []
-    paidLeaves = 2
-    holidays = 8
-
-    def __init__(self, name, age, gender):
-        self.name = name
-        self.age = age
-        self.gender = gender
-        self.active = True
-        self.generateID()
-        Employee.allEmployees.append(self)
-
-    def printDetails(self):
-        print(f"-------- Details of {self.name} --------")
-        print("Name: ", self.name)
-        print("Age: ", self.age)
-        print("Gender: ", self.gender)
-
-    @staticmethod       # decorators/ wrapper functions
-    def printAllEmployees():    # methods that do not take any argument are called static methods
-        print("id\t\tName")
-        for i in range(len(Employee.allEmployees)):
-            if Employee.allEmployees[i].active:
-                print(f"{Employee.allEmployees[i].id}\t{Employee.allEmployees[i].name}")
-
-    @classmethod    # methods those take class as an argument are called class methods
-    def addEmployee(cls):
-        print("Please enter the following details:")
-        name = input("Name: ")
-        age = int(input("Age: "))
-        gender = input("Gender: ")
-        return cls(name, age, gender)
-    
-    def generateID(self):
-        ch = input("Do you want to enter year & month of joining manually? Y/N: ").lower()
-        if ch == "y":
-            year = input("Year(YYYY): ").zfill(4)
-            month = input("Month(mm): ").zfill(2)
-        else:
-            year = str(datetime.now().year)
-            month = str(datetime.now().month).zfill(2)
-        self.id = year[2 : ] + month + "D" + str(len(Employee.allEmployees) + 100)
-
-# e1 = Employee("Nisha", 21, "F")
-# e2 = Employee("Ramesh", 23, "M")
-# e1.printDetails()
+e1 = Manager("Nisha", 21, "F", "MBA")
+e2 = SalesExecutive("Ramesh", 23, "M", 500000)
+e3 = Developer("Dhyani", 19, "F", "AI")
+e4 = Peon("Soham", 19, "M")
 """
 Format of employee id: 2302M101 (YY-MM-Designation-SrNo+100)
 """
@@ -62,9 +21,16 @@ while True:
     print("Press 9 to exit")
     option = int(input())
     if option == 1:
-        Employee.addEmployee()
+        role = input("Designation: ").lower()
+        lookupDictionary = {
+            "manager" : Manager,
+            "sales executive" : SalesExecutive,
+            "peon" : Peon,
+            "developer" : Developer,
+            "general manager" : GeneralManager
+        }
+        lookupDictionary[role].addEmployee()
         
-
     elif option == 2:
         Employee.printAllEmployees()
 
@@ -86,3 +52,5 @@ while True:
 
     else:
         print("Sorry, this service is currently unavailable...")
+
+# Next Class: repr, validations, abstraction
