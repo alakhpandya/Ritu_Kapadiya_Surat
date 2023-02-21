@@ -1,11 +1,16 @@
 from datetime import datetime
+from abc import ABC, abstractmethod       # abc: absctract base classes, ABC: Absctract Base Class
 
-class Employee():
+class Employee(ABC):
     allEmployees = []
     paidLeaves = 2
     holidays = 8
+    designation = "None"
 
-    def __init__(self, name, age, gender):
+    def __init__(self, name: str, age: int, gender: str):
+        assert isinstance(age, int), "Please enter integers only as age."
+        assert age > 18, f"{name} must be at least 18 years old to work with us!"
+        assert gender == "M" or gender == "F", "Unidentifyable Gender..."
         self.name = name
         self.age = age
         self.gender = gender
@@ -13,6 +18,7 @@ class Employee():
         self.generateID()
         Employee.allEmployees.append(self)
 
+    @abstractmethod
     def printDetails(self):
         title = f"-------- Details of {self.name} --------"
         print("\n" + title)
@@ -30,7 +36,9 @@ class Employee():
 
     # @classmethod    # methods those take class as an argument are called class methods
     # def addEmployee(cls):
+
     @staticmethod
+    @abstractmethod
     def addEmployee():
         print("Please enter the following details:")
         name = input("Name: ")
@@ -48,3 +56,7 @@ class Employee():
             year = str(datetime.now().year)
             month = str(datetime.now().month).zfill(2)
         self.id = year[2 : ] + month + f"{self.designation[0]}" + str(len(Employee.allEmployees) + 100)
+    
+    def __repr__(self):
+        return f'({self.id}, {self.name}, {self.designation})'
+    

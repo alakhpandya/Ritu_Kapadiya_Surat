@@ -5,14 +5,18 @@ from salesExecutive import SalesExecutive
 from peon import Peon
 from developer import Developer
 from generalManager import GeneralManager
+ 
+# e0 = Employee("Shrushti", 24, "F")
 
 e1 = Manager("Nisha", 21, "F", "MBA")
 e2 = SalesExecutive("Ramesh", 23, "M", 500000)
 e3 = Developer("Dhyani", 19, "F", "AI")
 e4 = Peon("Soham", 19, "M")
+e5 = GeneralManager("Rahul", 38, "M", "MBA")
 """
 Format of employee id: 2302M101 (YY-MM-Designation-SrNo+100)
 """
+
 while True:
     print("Press 1 to add an employee")
     print("Press 2 to view details of an employee")
@@ -53,4 +57,5 @@ while True:
     else:
         print("Sorry, this service is currently unavailable...")
 
-# Next Class: repr, validations, abstraction
+# print(Employee.allEmployees)
+# Next Class: encapsulation & polymorphism

@@ -3,6 +3,7 @@ from employee import Employee
 class Peon(Employee):
     designation = "Peon"
 
+    
     def printDetails(self):
         super().printDetails()
         print("-" * 20 + "\n\n")
