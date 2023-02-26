@@ -15,7 +15,7 @@ e4 = Peon("Soham", 19, "M")
 e5 = GeneralManager("Rahul", 38, "M", "MBA")
 """
 Format of employee id: 2302M101 (YY-MM-Designation-SrNo+100)
-"""
+""" 
 
 while True:
     print("Press 1 to add an employee")
@@ -41,6 +41,20 @@ while True:
         srNo = int(input("Last 3 digits of employee id: ")) - 100    # 0, 1
         Employee.allEmployees[srNo].printDetails()
 
+        # print("Ratings:", e1.__ratings)
+        # e1.__ratings = 5
+        # print("New Ratings:", e1.__ratings)
+        
+        # Accessing through name mangling
+        # print("Ratings:", e1._Employee__ratings)
+        # e1._Employee__ratings = 5
+        # print("New Ratings:", e1._Employee__ratings)
+
+        # Accessing by alias:
+        # print("Score:", e1.score)
+        # e1.score = 5
+        # print("New Score:", e1.score)
+
     elif option == 3:
         Employee.printAllEmployees()
 
@@ -58,4 +72,5 @@ while True:
         print("Sorry, this service is currently unavailable...")
 
 # print(Employee.allEmployees)
-# Next Class: encapsulation & polymorphism
+
+# Next Class: File Handling

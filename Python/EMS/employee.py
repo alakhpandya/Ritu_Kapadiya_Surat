@@ -3,9 +3,10 @@ from abc import ABC, abstractmethod       # abc: absctract base classes, ABC: Ab
 
 class Employee(ABC):
     allEmployees = []
-    paidLeaves = 2
-    holidays = 8
-    designation = "None"
+    _paidLeaves = 2         # Protected Variables
+    holidays = 8            # Public Variables
+    # designation = "None"
+    
 
     def __init__(self, name: str, age: int, gender: str):
         assert isinstance(age, int), "Please enter integers only as age."
@@ -15,8 +16,21 @@ class Employee(ABC):
         self.age = age
         self.gender = gender
         self.active = True
+        self.__ratings = 0
         self.generateID()
         Employee.allEmployees.append(self)
+
+    @property
+    def score(self):
+        return self.__ratings
+    
+    @score.setter
+    def score(self, newRatings):
+        self.__ratings = newRatings
+
+    @score.getter
+    def score(self):
+        return self.__ratings
 
     @abstractmethod
     def printDetails(self):
@@ -26,6 +40,7 @@ class Employee(ABC):
         print("Age:\t".expandtabs(16), self.age)
         print("Gender:\t".expandtabs(16), self.gender)
         print("Designation:\t".expandtabs(16), self.designation)
+        # print("Ratings:\t".expandtabs(16), self.__ratings)
 
     @staticmethod       # decorators/ wrapper functions
     def printAllEmployees():    # methods that do not take any argument are called static methods
