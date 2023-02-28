@@ -1,0 +1,3 @@
+Hello!
+This is my first txt file going to be read in Python!
+Thanks for reading...
