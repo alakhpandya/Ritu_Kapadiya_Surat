@@ -123,4 +123,15 @@ print(f.read())
 f.close()
 """
 
-# Next Class: An example of file handling
+# An example of file handling: A file that is having the following format:
+"""
+Batch: Python
+Days: Tuesdays & Saturdays
+Sr.No   Name            Role
+0       Alakh           Instructor
+1       Ritu            Student
+2       Vedika          Student
+3       Dhyani          Student
+4       Aarav           Student
+5       Shruti          Management
+"""
