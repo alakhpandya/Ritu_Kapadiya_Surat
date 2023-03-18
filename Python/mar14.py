@@ -36,20 +36,26 @@ while True:
     choice = input("Enter choice [R/W/X]").lower()  
     if choice == 'r':
         sr_no = int(input("Sr_no: "))
-        f = open("music.csv")
-        data = f.readlines()
-        f.close()
-        info = data[offset+sr_no].split(',')
-        print("Sr_no: "+info[0])
-        print("Album: "+info[1])
-        print("Artist: "+info[2])
-        print("Genre: "+info[3])
+        try:
+            f = open("music.csv")
+            data = f.readlines()
+            f.close()
+        except FileNotFoundError:
+            print("No such file exists. First create it.")
+        else:
+            info = data[offset+sr_no].split(',')
+            print("Sr_no: "+info[0])
+            print("Album: "+info[1])
+            print("Artist: "+info[2])
+            print("Genre: "+info[3])
     elif choice == 'w':
         album = input("Album: ")
         artist = input("Artist: ")
         genre = input("Genre: ")
         try:
             f = open("music.csv", "x")
+            f.write("Sr.No.,Album,Artist,Genre")
+            f.close()
         except FileExistsError:
             pass
         f = open("music.csv")
@@ -62,6 +68,3 @@ while True:
         f.close() 
     elif choice=='x':
         break
-    
-
-
