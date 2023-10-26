@@ -1,4 +1,4 @@
-use demo;
+-- use demo;
 
 -- select  productLine,count(*) 
 -- from (
@@ -29,10 +29,8 @@ p2 as
 select productLine, count(*)
 from p1
 group by productLine;
-
-use paintings;
 */
-
+use paintings;
 -- Window functions
 select *,
 row_number() OVER()
